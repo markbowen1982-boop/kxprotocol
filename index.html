@@ -132,6 +132,8 @@ input{font-family:inherit;}
   font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;
   border-radius:50px;transition:all .15s;}
 .chip.on{background:var(--mint-ll);border-color:var(--mint);color:var(--mint-d);}
+.chip.bundle-chip{background:var(--ink);border-color:var(--ink);color:var(--white);font-weight:500;}
+.chip.bundle-chip:active{opacity:.85;}
 
 /* ── COMPOUND CARDS (app style) ── */
 .cards-list{padding:0 0 20px;}
@@ -518,6 +520,7 @@ const FILTERS = [
   { key:'cognitive', label:'Cognitive' },
   { key:'gh', label:'GH' },
   { key:'longevity', label:'Longevity' },
+  { key:'bundle', label:'3 for $350 ✦' },
 ];
 
 let activeFilter = 'all';
@@ -584,9 +587,10 @@ function toggleCard(idx, btn) {
 
 // ── HOME CARDS ────────────────────────────────────────────────
 function buildHomeChips() {
-  document.getElementById('homeChips').innerHTML = FILTERS.map(f =>
-    `<div class="chip${f.key===activeFilter?' on':''}" onclick="setHomeFilter('${f.key}',this)">${f.label}</div>`
-  ).join('');
+  document.getElementById('homeChips').innerHTML = FILTERS.map(f => {
+    if (f.key === 'bundle') return `<div class="chip bundle-chip" onclick="goTab('subscribe')">${f.label}</div>`;
+    return `<div class="chip${f.key===activeFilter?' on':''}" onclick="setHomeFilter('${f.key}',this)">${f.label}</div>`;
+  }).join('');
 }
 
 function setHomeFilter(key, el) {
@@ -603,9 +607,10 @@ function buildHomeCards() {
 
 // ── COMPOUNDS SCREEN ──────────────────────────────────────────
 function buildCompChips() {
-  document.getElementById('compChips').innerHTML = FILTERS.map(f =>
-    `<div class="chip${f.key===compFilter?' on':''}" onclick="setCompFilter('${f.key}',this)">${f.label}</div>`
-  ).join('');
+  document.getElementById('compChips').innerHTML = FILTERS.map(f => {
+    if (f.key === 'bundle') return `<div class="chip bundle-chip" onclick="goTab('subscribe')">${f.label}</div>`;
+    return `<div class="chip${f.key===compFilter?' on':''}" onclick="setCompFilter('${f.key}',this)">${f.label}</div>`;
+  }).join('');
 }
 
 function setCompFilter(key, el) {
