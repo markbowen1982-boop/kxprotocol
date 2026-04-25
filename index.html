@@ -48,23 +48,6 @@ input{font-family:inherit;}
 /* ── APP SHELL ── */
 .app{display:flex;flex-direction:column;height:100vh;height:100dvh;}
 
-/* ── TOP BAR ── */
-.topbar{
-  background:var(--ink);
-  padding:calc(var(--safe-t) + 12px) 20px 12px;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-shrink:0;z-index:100;
-}
-.topbar-logo{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--white);}
-.topbar-logo em{color:var(--mint);font-style:normal;}
-.topbar-slogan{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.16em;
-  text-transform:uppercase;color:rgba(255,255,255,.3);}
-.topbar-wa{display:flex;align-items:center;gap:6px;padding:9px 16px;
-  background:var(--wa);color:var(--white);border-radius:50px;
-  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;}
-.topbar-wa svg{width:15px;height:15px;fill:currentColor;}
-
 /* ── SCREENS ── */
 .screens{flex:1;overflow:hidden;position:relative;}
 .screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;
@@ -73,37 +56,56 @@ input{font-family:inherit;}
   transition:opacity .22s ease,transform .22s ease;}
 .screen.active{opacity:1;pointer-events:all;transform:translateY(0);}
 
-/* ── TAB BAR ── */
-.tabbar{
-  background:var(--white);border-top:1px solid var(--rule);
-  display:grid;grid-template-columns:repeat(4,1fr);
-  padding-bottom:var(--safe-b);flex-shrink:0;
+/* ── TOPBAR (unified dark) ── */
+.topbar{
+  background:var(--ink);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  padding:0 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;flex-shrink:0;z-index:100;
+  padding-top:var(--safe-t);
 }
-.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:10px 4px 8px;gap:4px;color:var(--mist);transition:color .15s;}
-.tab.active{color:var(--mint-d);}
-.tab svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
-.tab-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;}
+.topbar-brand{display:flex;flex-direction:column;flex-shrink:0;
+  cursor:pointer;transition:opacity .15s;-webkit-tap-highlight-color:transparent;}
+.topbar-brand:hover{opacity:.75;}
+.topbar-brand.home-active .topbar-logo{color:var(--white);}
+.topbar-brand.home-active .topbar-slogan{color:rgba(255,255,255,.4);}
+.topbar-brand:not(.home-active) .topbar-logo{color:rgba(255,255,255,.55);}
+.topbar-brand:not(.home-active) .topbar-slogan{color:rgba(255,255,255,.2);}
+.topbar-logo{font-family:'DM Sans',sans-serif;font-size:21px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--white);}
+.topbar-logo em{color:var(--mint);font-style:normal;}
+.topbar-slogan{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(255,255,255,.28);}
+.topbar-nav{display:flex;align-items:center;gap:2px;margin-left:auto;}
+.tnav{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;padding:8px 10px;border-radius:8px;
+  color:rgba(255,255,255,.38);background:none;border:none;cursor:pointer;
+  transition:all .15s;}
+.tnav:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.85);}
+.tnav.active{background:rgba(122,172,152,.18);color:var(--mint);}
+.tnav svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.tnav-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;}
 
 /* ── SHARED COMPONENTS ── */
 .screen-pad{padding:20px;}
-.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--mint-d);margin-bottom:6px;}
-.section-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;
-  color:var(--ink);line-height:1.1;margin-bottom:6px;}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;
+  color:var(--ink);line-height:1.1;margin-bottom:8px;}
 .section-rule{width:28px;height:2px;background:var(--mint);margin-bottom:18px;}
-.section-body{font-size:14px;font-weight:300;color:var(--ink-l);line-height:1.75;margin-bottom:20px;}
+.section-body{font-size:15px;font-weight:300;color:var(--ink-l);line-height:1.75;margin-bottom:20px;}
 
 /* ── HOME SCREEN ── */
-.home-hero{background:var(--ink);padding:32px 20px 28px;position:relative;overflow:hidden;}
-.home-hero::before{content:'';position:absolute;top:-100px;right:-80px;
-  width:280px;height:280px;
-  background:radial-gradient(circle,rgba(122,172,152,.12) 0%,transparent 70%);
+.home-hero{background:var(--ink);padding:22px 20px 28px;position:relative;overflow:hidden;}
+.home-hero::before{content:'';position:absolute;top:-60px;right:-60px;
+  width:260px;height:260px;
+  background:radial-gradient(circle,rgba(122,172,152,.10) 0%,transparent 70%);
   pointer-events:none;}
 .home-title{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;
   color:var(--white);line-height:1;margin-bottom:10px;}
 .home-title em{color:var(--mint);font-style:normal;}
-.home-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:24px;}
+.home-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.72);line-height:1.7;margin-bottom:24px;}
 .home-rule{width:36px;height:1px;background:var(--mint);margin-bottom:16px;}
 .home-slogan{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.22em;
   text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:24px;}
@@ -115,17 +117,18 @@ input{font-family:inherit;}
 .wa-pill svg{width:17px;height:17px;fill:currentColor;}
 
 .home-trust{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--rule);border-top:1px solid var(--rule);}
-.trust-tile{background:var(--white);padding:18px 16px;display:flex;align-items:flex-start;gap:12px;}
+.trust-tile{background:var(--white);padding:18px 14px;display:flex;align-items:flex-start;gap:10px;}
 .trust-tile:nth-child(odd){border-right:1px solid var(--rule);}
 .trust-tile:nth-child(1),.trust-tile:nth-child(2){border-bottom:1px solid var(--rule);}
-.trust-icon-sm{font-size:18px;flex-shrink:0;margin-top:1px;}
-.trust-title-sm{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:2px;}
-.trust-body-sm{font-size:12px;font-weight:300;color:var(--ink-l);line-height:1.55;}
+.trust-icon-sm{font-size:20px;flex-shrink:0;line-height:1;margin-top:0;}
+.trust-title-sm{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px;}
+.trust-body-sm{font-size:13px;font-weight:300;color:var(--ink-l);line-height:1.55;}
 
 .home-section-head{padding:24px 20px 12px;border-bottom:1px solid var(--rule);}
 
 /* QUICK ACCESS CHIPS */
-.chip-row{display:flex;gap:8px;padding:16px 20px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.chip-row{display:flex;gap:8px;padding:14px 20px 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+  border-bottom:1px solid var(--rule);}
 .chip-row::-webkit-scrollbar{display:none;}
 .chip{flex-shrink:0;padding:8px 16px;border:1px solid var(--rule-d);
   background:var(--white);color:var(--ink-l);
@@ -140,34 +143,26 @@ input{font-family:inherit;}
 .c-card{background:var(--white);border-bottom:1px solid var(--rule);
   overflow:hidden;transition:background .15s;}
 .c-card:active{background:var(--mint-ll);}
-.c-card-main{padding:18px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.c-card-main{padding:18px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
 .c-left{flex:1;min-width:0;}
 .c-name-app{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;
   color:var(--ink);line-height:1.15;margin-bottom:2px;}
-.c-code-app{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--mint-d);margin-bottom:6px;}
-.c-purpose-app{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;
+.c-code-app{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--mint-d);margin-bottom:6px;}
+.c-purpose-app{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;
   text-transform:uppercase;color:var(--mist);margin-bottom:8px;}
-.c-why-app{font-size:13px;font-weight:300;color:var(--ink-l);line-height:1.6;}
-.c-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;}
-.c-price-app{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);line-height:1;}
+.c-plain{font-size:15px;font-weight:400;color:var(--ink-l);line-height:1.65;margin-top:8px;}
+.c-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px;flex-shrink:0;
+  min-width:96px;border-left:1px solid var(--rule);padding-left:16px;}
+.c-price-app{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--ink);line-height:1;}
 .c-price-poa{font-family:'DM Mono',monospace;font-size:10px;color:var(--mist);}
 .badge-sm{padding:3px 8px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.06em;text-transform:uppercase;}
 .badge-p-sm{background:var(--mint-ll);color:var(--mint-d);border:1px solid #c8e4dc;}
 .badge-v-sm{background:var(--peach-l);color:var(--peach);border:1px solid #f0ddd0;}
 .badge-e-sm{background:var(--paper-w);color:var(--mist);border:1px solid var(--rule);}
-.c-toggle{display:flex;align-items:center;gap:6px;padding:7px 14px;
-  border:1px solid var(--rule-d);background:transparent;
-  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mint-d);}
-.c-toggle svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0;transition:transform .2s;}
-.c-toggle.open svg{transform:rotate(180deg);}
-
-/* EXPANDED */
-.c-detail-app{max-height:0;overflow:hidden;transition:max-height .4s ease;}
-.c-detail-app.open{max-height:400px;}
-.c-detail-body{padding:0 20px 20px;border-top:1px solid var(--rule);background:var(--paper);}
-.c-detail-body .dl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--mist);margin:14px 0 4px;}
-.c-detail-body .dv{font-size:13px;font-weight:300;color:var(--ink-l);line-height:1.65;}
+.c-order-btn{display:flex;align-items:center;justify-content:center;
+  width:40px;height:40px;background:var(--wa);border-radius:50%;flex-shrink:0;transition:opacity .2s;}
+.c-order-btn:active{opacity:.8;}
+.c-order-btn svg{width:19px;height:19px;}
 .order-btn-full{display:flex;align-items:center;justify-content:center;gap:8px;
   width:100%;margin-top:16px;padding:14px;
   background:var(--wa);color:var(--white);
@@ -180,7 +175,7 @@ input{font-family:inherit;}
 .sub-price-app{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;
   color:var(--white);line-height:1;}
 .sub-per{font-size:16px;color:rgba(255,255,255,.35);margin-left:6px;}
-.sub-desc-app{font-size:14px;font-weight:300;color:rgba(255,255,255,.5);
+.sub-desc-app{font-size:15px;font-weight:300;color:rgba(255,255,255,.72);
   margin-top:10px;line-height:1.7;margin-bottom:24px;}
 .sub-start{display:flex;align-items:center;justify-content:center;gap:10px;
   width:100%;padding:16px;background:var(--wa);color:var(--white);
@@ -188,37 +183,38 @@ input{font-family:inherit;}
   border-radius:4px;}
 .sub-start svg{width:17px;height:17px;fill:currentColor;}
 
-.build-section{padding:20px;}
-.build-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--mist);margin-bottom:12px;}
-.b-list{background:var(--white);border:1px solid var(--rule);border-radius:4px;overflow:hidden;}
-.b-row{display:flex;align-items:center;gap:12px;padding:14px 16px;
+.build-section{padding:24px 20px;}
+.build-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--mist);margin-bottom:14px;}
+.b-list{background:var(--white);border:1px solid var(--rule);border-radius:6px;overflow:hidden;}
+.b-row{display:flex;align-items:center;gap:14px;padding:14px 16px;
   border-bottom:1px solid var(--rule);transition:background .15s;}
 .b-row:last-child{border-bottom:none;}
 .b-row:active,.b-row.sel{background:var(--mint-ll);}
 .b-row.dim{opacity:.35;pointer-events:none;}
-.b-chk{width:22px;height:22px;border:1.5px solid var(--rule-d);border-radius:4px;
+.b-chk{width:22px;height:22px;border:1.5px solid var(--rule-d);border-radius:6px;
   flex-shrink:0;display:flex;align-items:center;justify-content:center;
   font-size:13px;color:var(--white);transition:all .15s;}
 .b-row.sel .b-chk{background:var(--mint);border-color:var(--mint);}
 .b-rname{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);line-height:1.2;}
-.b-rpurpose{font-family:'DM Mono',monospace;font-size:9px;color:var(--mist);margin-top:2px;}
+.b-rpurpose{font-family:'DM Mono',monospace;font-size:10px;color:var(--mist);margin-top:3px;}
 
-.b-summary{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:16px;margin-bottom:16px;}
-.b-sum-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--mist);margin-bottom:10px;}
-.b-sum-slots{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
-.b-sum-slot{font-size:14px;padding:10px 14px;border:1px solid var(--rule);background:var(--paper);}
-.b-sum-slot.empty{color:var(--rule-d);font-style:italic;border-style:dashed;}
-.b-sum-slot.filled{background:var(--mint-ll);border-color:#c8e4dc;color:var(--ink);}
+.b-summary{background:var(--white);border:1px solid var(--rule);border-radius:6px;padding:20px;margin-bottom:16px;}
+.b-sum-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mist);margin-bottom:12px;}
+.b-sum-slots{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+.b-sum-slot{font-size:14px;padding:12px 16px;border:1px solid var(--rule);
+  background:var(--paper);border-radius:6px;}
+.b-sum-slot.empty{color:var(--mist);font-style:italic;border-style:dashed;border-color:var(--rule-d);}
+.b-sum-slot.filled{background:var(--mint-ll);border-color:#c8e4dc;color:var(--ink);border-style:solid;}
 .b-sum-price{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--ink);margin-bottom:4px;}
-.b-sum-count{font-family:'DM Mono',monospace;font-size:10px;color:var(--mist);margin-bottom:12px;}
+.b-sum-count{font-family:'DM Mono',monospace;font-size:10px;color:var(--mist);margin-bottom:14px;}
 
 .stacks-section{padding:20px;}
 .stack-card-app{background:var(--white);border:1px solid var(--rule);
   border-radius:4px;padding:18px;margin-bottom:8px;}
 .stack-name-app{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);margin-bottom:4px;}
-.stack-compounds-app{font-size:12px;font-weight:300;color:var(--ink-l);line-height:1.6;margin-bottom:14px;}
+.stack-compounds-app{font-size:14px;font-weight:300;color:var(--ink-l);line-height:1.6;margin-bottom:14px;}
 .stack-footer-app{display:flex;align-items:center;justify-content:space-between;}
 .stack-price-app{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);}
 .stack-sub-btn{display:flex;align-items:center;gap:6px;padding:10px 16px;
@@ -230,7 +226,7 @@ input{font-family:inherit;}
 .order-hero{background:var(--ink);padding:28px 20px;}
 .order-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;
   color:var(--white);margin-bottom:6px;}
-.order-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:20px;}
+.order-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.72);line-height:1.7;margin-bottom:20px;}
 .wa-big{display:flex;align-items:center;justify-content:center;gap:10px;
   width:100%;padding:18px;background:var(--wa);color:var(--white);border-radius:4px;
   font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;
@@ -244,7 +240,7 @@ input{font-family:inherit;}
   color:var(--rule-d);line-height:1;flex-shrink:0;width:44px;}
 .how-content{}
 .how-t{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px;}
-.how-b{font-size:13px;font-weight:300;color:var(--ink-l);line-height:1.65;}
+.how-b{font-size:14px;font-weight:300;color:var(--ink-l);line-height:1.65;}
 
 .info-list{padding:20px;display:flex;flex-direction:column;gap:0;}
 .info-item{padding:14px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:3px;}
@@ -260,7 +256,7 @@ input{font-family:inherit;}
   pointer-events:none;}
 .kanji-app{font-size:56px;color:var(--mint);line-height:1;margin-bottom:8px;}
 .kanji-title-app{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--white);margin-bottom:10px;}
-.kanji-body-app{font-size:14px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.75;}
+.kanji-body-app{font-size:15px;font-weight:300;color:rgba(255,255,255,.72);line-height:1.75;}
 
 .mission-app{background:rgba(122,172,152,.08);border-left:3px solid var(--mint);
   padding:20px;margin:20px;}
@@ -301,6 +297,132 @@ input{font-family:inherit;}
   font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;
   border-radius:50px;white-space:nowrap;flex-shrink:0;}
 .install-close{padding:4px;color:var(--mist);font-size:18px;flex-shrink:0;}
+/* ── CALCULATOR ── */
+.calc-hero{background:var(--ink);padding:28px 20px;}
+.calc-hero-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--white);line-height:1.1;margin-bottom:8px;}
+.hero-rule{width:28px;height:2px;background:var(--mint);margin:10px 0 16px;}
+.calc-hero-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.72);line-height:1.7;}
+.calc-body{padding:16px 16px 32px;display:flex;flex-direction:column;gap:12px;}
+.calc-card{background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:18px;}
+.calc-step-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.calc-step-num{width:24px;height:24px;border-radius:50%;background:var(--mint);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--white);line-height:1;}
+.calc-step-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mint-d);}
+.calc-select{width:100%;background:var(--paper);border:1px solid var(--rule-d);border-radius:4px;padding:11px 12px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;}
+.calc-select:focus{border-color:var(--mint);}
+.calc-hint{font-family:'DM Mono',monospace;font-size:10px;color:var(--mint-d);margin-top:8px;min-height:16px;letter-spacing:.04em;}
+.calc-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.calc-field{display:flex;flex-direction:column;gap:6px;}
+.calc-field-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);}
+.calc-input{background:var(--paper);border:1px solid var(--rule-d);border-radius:4px;padding:11px 12px;font-family:'DM Sans',sans-serif;font-size:16px;color:var(--ink);outline:none;width:100%;transition:border-color .2s;}
+.calc-input:focus{border-color:var(--mint);background:var(--white);}
+.calc-result-row{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid var(--rule);}
+.calc-result-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);}
+.calc-result-val{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--mint-d);}
+
+/* RESULT CARD */
+.calc-result-card{background:var(--ink);border-radius:8px;padding:24px;text-align:center;}
+.calc-result-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.calc-draw-big{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:var(--mint);line-height:1;}
+.calc-draw-sub{font-family:'DM Mono',monospace;font-size:13px;color:rgba(255,255,255,.5);margin-top:6px;}
+.calc-divider{height:1px;background:rgba(255,255,255,.08);margin:20px 0;}
+.calc-breakdown{display:flex;flex-direction:column;gap:8px;text-align:left;}
+.calc-brow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.calc-brow:last-child{border-bottom:none;}
+.calc-brow-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.3);}
+.calc-brow-val{font-family:'DM Mono',monospace;font-size:12px;color:rgba(255,255,255,.8);}
+
+/* PROTOCOL */
+.calc-freq-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.freq-btn{padding:8px 16px;border:1px solid var(--rule-d);background:transparent;color:var(--mist);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;border-radius:50px;cursor:pointer;transition:all .15s;}
+.freq-btn.on{background:var(--mint-ll);border-color:var(--mint);color:var(--mint-d);}
+.calc-schedule{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:14px;}
+.day-cell{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:6px;background:var(--paper);}
+.day-cell.inject{background:var(--mint-ll);border:1px solid #c8e4dc;}
+.day-name{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--mist);}
+.day-cell.inject .day-name{color:var(--mint-d);}
+.day-dot{width:8px;height:8px;border-radius:50%;background:var(--rule-d);}
+.day-cell.inject .day-dot{background:var(--mint);}
+.calc-vial-life{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--mist);padding:12px;background:var(--paper);border-radius:4px;line-height:1.6;}
+
+/* DISCLAIMER */
+.calc-disclaimer{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;background:var(--paper-w);border:1px solid var(--rule);border-radius:8px;}
+.calc-disclaimer-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+.calc-disclaimer-text{font-size:11px;font-weight:300;color:var(--mist);line-height:1.6;}
+/* ── ORDER FORM ── */
+.order-form-section{padding:20px;background:var(--paper);}
+.order-form-card{background:var(--white);border:1px solid var(--rule);border-radius:8px;overflow:hidden;}
+.order-form-head{padding:16px 20px;border-bottom:1px solid var(--rule);background:var(--paper-w);
+  display:flex;align-items:center;gap:10px;}
+.order-form-head-icon{width:28px;height:28px;background:var(--mint-ll);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;}
+.order-form-head-text{}
+.order-form-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:1px;}
+.order-form-subtitle{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--mist);}
+.order-form-body{padding:16px 20px;display:flex;flex-direction:column;gap:14px;}
+.order-field{display:flex;flex-direction:column;gap:5px;}
+.order-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mist);}
+.order-label span{color:var(--mint-d);}
+.order-input,.order-textarea{
+  background:var(--paper);border:1px solid var(--rule-d);border-radius:6px;
+  padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);
+  outline:none;width:100%;transition:border-color .2s,background .2s;}
+.order-input:focus,.order-textarea:focus{border-color:var(--mint);background:var(--white);}
+.order-input::placeholder,.order-textarea::placeholder{color:var(--rule-d);}
+.order-textarea{resize:none;line-height:1.55;}
+.order-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.order-form-footer{padding:16px 20px;border-top:1px solid var(--rule);background:var(--paper-w);}
+.order-send-btn{display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:16px;background:var(--wa);color:var(--white);border-radius:6px;
+  font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  box-shadow:0 4px 20px rgba(37,211,102,.2);transition:opacity .2s;}
+.order-send-btn:active{opacity:.85;}
+.order-send-btn svg{width:18px;height:18px;fill:currentColor;flex-shrink:0;}
+.order-send-btn.disabled{opacity:.4;pointer-events:none;}
+.order-validation{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;
+  color:var(--peach);margin-top:8px;min-height:14px;}
+.order-preview{background:var(--ink);border-radius:6px;padding:14px 16px;
+  margin-bottom:14px;display:none;}
+.order-preview.visible{display:block;}
+.order-preview-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px;}
+.order-preview-text{font-size:12px;font-weight:300;color:rgba(255,255,255,.7);
+  line-height:1.7;white-space:pre-wrap;word-break:break-word;}
+
+/* ── SITE FOOTER ── */
+.site-ruo-bar{background:#1d3a52;padding:14px 20px;display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;}
+.site-ruo-heading{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.14em;color:#fff;white-space:nowrap;flex-shrink:0;}
+.site-ruo-dash{color:rgba(255,255,255,.3);flex-shrink:0;}
+.site-ruo-body{font-size:12px;font-weight:300;color:rgba(255,255,255,.55);line-height:1.6;}
+
+.site-footer{background:#122436;padding:32px 20px 20px;}
+.site-footer-top{display:grid;grid-template-columns:1fr 1fr;gap:28px 20px;margin-bottom:28px;}
+.site-footer-brand{}
+.site-footer-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:.1em;color:#fff;margin-bottom:10px;}
+.site-footer-logo span{color:var(--mint-l);}
+.site-footer-tagline{font-size:12px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.7;}
+.site-footer-col{}
+.site-footer-col-title{font-family:'DM Mono',monospace;font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:10px;}
+.site-footer-link{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.4);padding:5px 0;cursor:pointer;transition:color .15s;text-decoration:none;}
+.site-footer-link:hover,.site-footer-link:active{color:rgba(255,255,255,.8);}
+.site-footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:16px;display:flex;flex-direction:column;gap:6px;}
+.site-footer-copy{font-size:11px;font-weight:300;color:rgba(255,255,255,.2);}
+.site-footer-ruo-note{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;color:rgba(255,255,255,.15);}
+
+/* ── LEGAL MODALS ── */
+.legal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:800;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .2s;}
+.legal-overlay.open{opacity:1;pointer-events:all;}
+.legal-modal{background:var(--white);width:100%;max-height:80vh;border-radius:16px 16px 0 0;overflow:hidden;transform:translateY(100%);transition:transform .3s ease;}
+.legal-overlay.open .legal-modal{transform:translateY(0);}
+.legal-modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--rule);background:var(--paper-w);}
+.legal-modal-title{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;color:var(--ink);}
+.legal-modal-close{background:none;border:none;font-size:20px;color:var(--mist);padding:2px 6px;cursor:pointer;}
+.legal-modal-body{padding:20px;overflow-y:auto;max-height:calc(80vh - 60px);font-size:13px;font-weight:300;color:var(--ink-l);line-height:1.8;}
+.legal-modal-body h3{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--ink);margin:16px 0 6px;}
+.legal-modal-body p{margin-bottom:12px;}
 </style>
 </head>
 <body>
@@ -309,14 +431,29 @@ input{font-family:inherit;}
 
   <!-- TOP BAR -->
   <div class="topbar">
-    <div>
+    <div class="topbar-brand home-active" id="topbar-brand" onclick="goTab('home')">
       <div class="topbar-logo">KX<em> Protocol</em></div>
       <div class="topbar-slogan">1% Better Every Day</div>
     </div>
-    <a href="https://wa.me/61419630774?text=Hi%2C%20I'd%20like%20to%20enquire%20about%20KX%20Protocol." target="_blank" class="topbar-wa">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Order
-    </a>
+
+    <nav class="topbar-nav">
+      <button class="tnav" id="tnav-compounds" onclick="goTab('compounds')">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+        <span class="tnav-label">Catalog</span>
+      </button>
+      <button class="tnav" id="tnav-calc" onclick="goTab('calc')">
+        <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h8M8 14h4"/><circle cx="16" cy="16" r="2"/></svg>
+        <span class="tnav-label">Calc</span>
+      </button>
+      <button class="tnav" id="tnav-subscribe" onclick="goTab('subscribe')">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <span class="tnav-label">Subscribe</span>
+      </button>
+      <button class="tnav" id="tnav-order" onclick="goTab('order')">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span class="tnav-label">Order</span>
+      </button>
+    </nav>
   </div>
 
   <!-- INSTALL BANNER -->
@@ -336,8 +473,7 @@ input{font-family:inherit;}
     <!-- HOME -->
     <div class="screen active" id="screen-home">
       <div class="home-hero">
-        <div class="home-title">KX<em> Protocol</em></div>
-        <div class="home-rule"></div>
+        <div class="home-rule" style="margin-bottom:18px;"></div>
         <div class="home-sub">Research-grade peptides and compounds. Every batch third-party verified for purity and potency.</div>
         <a href="https://wa.me/61419630774?text=Hi%2C%20I'd%20like%20to%20place%20an%20order%20with%20KX%20Protocol." target="_blank" class="wa-pill">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -352,7 +488,8 @@ input{font-family:inherit;}
       </div>
       <div class="home-section-head">
         <div class="section-eyebrow">Quick Browse</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);margin-top:2px;">Filter by goal</div>
+        <div class="section-title">Filter by goal</div>
+        <div class="section-rule"></div>
       </div>
       <div class="chip-row" id="homeChips"></div>
       <div class="cards-list" id="homeCards"></div>
@@ -371,8 +508,9 @@ input{font-family:inherit;}
     <!-- SUBSCRIBE -->
     <div class="screen" id="screen-subscribe">
       <div class="sub-hero-app">
-        <div class="section-eyebrow" style="color:rgba(255,255,255,.35);">Monthly Subscription</div>
+        <div class="section-eyebrow" style="color:rgba(255,255,255,.45);">Monthly Subscription</div>
         <div class="sub-price-app">$350<span class="sub-per">/month</span></div>
+        <div class="hero-rule"></div>
         <div class="sub-desc-app">Any 3 compounds. Mix and match each month as your goals evolve. No lock-in.</div>
         <a href="https://wa.me/61419630774?text=Hi%2C%20I'd%20like%20to%20start%20a%20monthly%20subscription%20%E2%80%94%20any%203%20compounds%20for%20%24350%2Fmonth." target="_blank" class="sub-start">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -404,20 +542,75 @@ input{font-family:inherit;}
     <!-- ORDER -->
     <div class="screen" id="screen-order">
       <div class="order-hero">
-        <div class="section-eyebrow" style="color:rgba(255,255,255,.35);">Order</div>
+        <div class="section-eyebrow" style="color:rgba(255,255,255,.45);">Order</div>
         <div class="order-num">+61 419 630 774</div>
-        <div class="order-sub">Message us directly on WhatsApp. No bots, no forms. We respond same day during business hours.</div>
-        <a href="https://wa.me/61419630774?text=Hi%2C%20I'd%20like%20to%20place%20an%20order%20with%20KX%20Protocol." target="_blank" class="wa-big">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Open WhatsApp Now
-        </a>
+        <div class="hero-rule"></div>
+        <div class="order-sub">Fill in your details below — one tap sends everything to WhatsApp. We confirm same day.</div>
+      </div>
+
+      <!-- ORDER FORM -->
+      <div class="order-form-section">
+        <div class="order-form-card">
+          <div class="order-form-head">
+            <div class="order-form-head-icon">📋</div>
+            <div class="order-form-head-text">
+              <div class="order-form-title">Order Request</div>
+              <div class="order-form-subtitle">Fills your WhatsApp message automatically</div>
+            </div>
+          </div>
+          <div class="order-form-body">
+
+            <!-- Name -->
+            <div class="order-field">
+              <div class="order-label">Full Name <span>*</span></div>
+              <input class="order-input" id="ofName" type="text" placeholder="e.g. John Smith" oninput="orderFormUpdate()">
+            </div>
+
+            <!-- Address -->
+            <div class="order-field">
+              <div class="order-label">Delivery Address <span>*</span></div>
+              <input class="order-input" id="ofStreet" type="text" placeholder="Street address" oninput="orderFormUpdate()" style="margin-bottom:6px;">
+              <div class="order-row">
+                <input class="order-input" id="ofSuburb" type="text" placeholder="Suburb" oninput="orderFormUpdate()">
+                <input class="order-input" id="ofState" type="text" placeholder="State" oninput="orderFormUpdate()">
+              </div>
+              <input class="order-input" id="ofPostcode" type="text" placeholder="Postcode" oninput="orderFormUpdate()" style="margin-top:6px;max-width:120px;">
+            </div>
+
+            <!-- Order details -->
+            <div class="order-field">
+              <div class="order-label">What would you like to order? <span>*</span></div>
+              <textarea class="order-textarea" id="ofItems" rows="3" placeholder="e.g. BPC-157 + TB-500 (BP20) × 1&#10;NAD+ (NJ500) × 1" oninput="orderFormUpdate()"></textarea>
+            </div>
+
+            <!-- Notes (optional) -->
+            <div class="order-field">
+              <div class="order-label">Additional notes <span style="color:var(--mist);">(optional)</span></div>
+              <textarea class="order-textarea" id="ofNotes" rows="2" placeholder="e.g. Preferred delivery time, questions, etc." oninput="orderFormUpdate()"></textarea>
+            </div>
+
+            <!-- Live preview -->
+            <div class="order-preview" id="orderPreview">
+              <div class="order-preview-label">Message preview</div>
+              <div class="order-preview-text" id="orderPreviewText"></div>
+            </div>
+
+          </div>
+          <div class="order-form-footer">
+            <div class="order-validation" id="orderValidation"></div>
+            <button class="order-send-btn disabled" id="orderSendBtn" onclick="orderSend()">
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Send via WhatsApp
+            </button>
+          </div>
+        </div>
       </div>
 
       <div class="how-app">
         <div class="section-eyebrow" style="padding:0">How It Works</div>
-        <div class="how-step"><div class="how-n">01</div><div class="how-content"><div class="how-t">Browse & Select</div><div class="how-b">Review compounds in the catalog. Note the name, code, and quantity you need.</div></div></div>
-        <div class="how-step"><div class="how-n">02</div><div class="how-content"><div class="how-t">Message on WhatsApp</div><div class="how-b">Tap the button above. We respond same day with availability and pricing.</div></div></div>
-        <div class="how-step"><div class="how-n">03</div><div class="how-content"><div class="how-t">Confirm & Dispatch</div><div class="how-b">Payment confirmed. Discreet packaging dispatched within 1–2 business days.</div></div></div>
+        <div class="how-step"><div class="how-n">01</div><div class="how-content"><div class="how-t">Fill in Your Details</div><div class="how-b">Enter your name, delivery address, and what you'd like to order above.</div></div></div>
+        <div class="how-step"><div class="how-n">02</div><div class="how-content"><div class="how-t">Send via WhatsApp</div><div class="how-b">One tap opens WhatsApp with your full order pre-filled. We confirm same day.</div></div></div>
+        <div class="how-step"><div class="how-n">03</div><div class="how-content"><div class="how-t">Pay → Dispatch → Tracking</div><div class="how-b">Once payment is received we dispatch within 1–2 business days and send your tracking number.</div></div></div>
       </div>
 
       <div class="info-list">
@@ -427,13 +620,78 @@ input{font-family:inherit;}
         <div class="info-item"><div class="info-lbl">COAs</div><div class="info-val">Available on request, every product</div></div>
         <div class="info-item"><div class="info-lbl">Standard</div><div class="info-val">Research Use Only — all products</div></div>
       </div>
+
+      <!-- RUO BANNER -->
+      <div class="site-ruo-bar">
+        <span class="site-ruo-heading">FOR RESEARCH USE ONLY</span>
+        <span class="site-ruo-dash">—</span>
+        <span class="site-ruo-body">All KX Protocol products are intended exclusively for in-vitro research and laboratory use. Not for human or animal consumption, therapeutic application, or self-administration.</span>
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="site-footer">
+        <div class="site-footer-top">
+
+          <div class="site-footer-brand">
+            <div class="site-footer-logo">KX<span> Protocol</span></div>
+            <div class="site-footer-tagline">Research-grade peptides.<br>Third-party verified.<br>1% Better Every Day.</div>
+          </div>
+
+          <div class="site-footer-col">
+            <div class="site-footer-col-title">Products</div>
+            <a class="site-footer-link" onclick="goTab('compounds')">Shop Compounds</a>
+            <a class="site-footer-link" onclick="goTab('calc')">Peptide Calculator</a>
+            <a class="site-footer-link" onclick="goTab('subscribe')">Monthly Subscription</a>
+          </div>
+
+          <div class="site-footer-col">
+            <div class="site-footer-col-title">Legal</div>
+            <a class="site-footer-link" href="#" onclick="showModal('privacy')">Privacy Policy</a>
+            <a class="site-footer-link" href="#" onclick="showModal('terms')">Terms & Conditions</a>
+            <a class="site-footer-link" href="#" onclick="showModal('shipping')">Shipping Policy</a>
+            <a class="site-footer-link" href="#" onclick="showModal('refunds')">Refunds & Returns</a>
+          </div>
+
+          <div class="site-footer-col">
+            <div class="site-footer-col-title">Company</div>
+            <a class="site-footer-link" onclick="goTab('about')">About</a>
+            <a class="site-footer-link" href="#" onclick="showModal('ruo')">Research Use Only</a>
+          </div>
+
+          <div class="site-footer-col">
+            <div class="site-footer-col-title">Contact</div>
+            <a class="site-footer-link" href="https://wa.me/61419630774" target="_blank">+61 419 630 774</a>
+            <a class="site-footer-link" href="https://wa.me/61419630774?text=Hi" target="_blank">WhatsApp Order Line</a>
+          </div>
+
+        </div>
+
+        <div class="site-footer-bottom">
+          <div class="site-footer-copy">© 2026 KX Protocol. All rights reserved.</div>
+          <div class="site-footer-ruo-note">FOR RESEARCH USE ONLY · NOT FOR HUMAN CONSUMPTION</div>
+        </div>
+      </footer>
+
+      <!-- LEGAL MODALS -->
+      <div class="legal-overlay" id="legalOverlay" onclick="closeModal()">
+        <div class="legal-modal" onclick="event.stopPropagation()">
+          <div class="legal-modal-head">
+            <div class="legal-modal-title" id="legalTitle"></div>
+            <button class="legal-modal-close" onclick="closeModal()">✕</button>
+          </div>
+          <div class="legal-modal-body" id="legalBody"></div>
+        </div>
+      </div>
+
     </div>
 
     <!-- ABOUT -->
     <div class="screen" id="screen-about">
       <div class="about-hero">
+        <div class="section-eyebrow" style="color:rgba(255,255,255,.45);">About</div>
         <div class="kanji-app">改善</div>
         <div class="kanji-title-app">KX Protocol</div>
+        <div class="hero-rule"></div>
         <div class="kanji-body-app">Kaizen — the philosophy of 1% better every day. We apply that standard to our sourcing, testing, and communication.</div>
       </div>
       <div class="mission-app">
@@ -450,27 +708,111 @@ input{font-family:inherit;}
       </div>
     </div>
 
+    <!-- CALCULATOR -->
+    <div class="screen" id="screen-calc">
+
+      <div class="calc-hero">
+        <div class="section-eyebrow" style="color:rgba(255,255,255,.45);">Reconstitution & Dosing</div>
+        <div class="calc-hero-title">Peptide Calculator</div>
+        <div class="hero-rule"></div>
+        <div class="calc-hero-sub">Works out your exact syringe draw based on vial size, water added, and desired dose.</div>
+      </div>
+
+      <div class="calc-body">
+
+        <!-- STEP 1 — COMPOUND -->
+        <div class="calc-card">
+          <div class="calc-step-header">
+            <div class="calc-step-num">1</div>
+            <div class="calc-step-label">Select Compound</div>
+          </div>
+          <select class="calc-select" id="calcCompound" onchange="calcUpdate()">
+            <option value="">Choose a compound…</option>
+          </select>
+          <div class="calc-hint" id="calcCompoundHint"></div>
+        </div>
+
+        <!-- STEP 2 — RECONSTITUTION -->
+        <div class="calc-card">
+          <div class="calc-step-header">
+            <div class="calc-step-num">2</div>
+            <div class="calc-step-label">Reconstitution</div>
+          </div>
+          <div class="calc-row">
+            <div class="calc-field">
+              <div class="calc-field-label">Vial size (mg)</div>
+              <input class="calc-input" type="number" id="calcVialMg" placeholder="e.g. 10" oninput="calcUpdate()">
+            </div>
+            <div class="calc-field">
+              <div class="calc-field-label">BAC water added (ml)</div>
+              <input class="calc-input" type="number" id="calcWaterMl" placeholder="e.g. 2" oninput="calcUpdate()">
+            </div>
+          </div>
+          <div class="calc-result-row" id="calcConcRow" style="display:none;">
+            <div class="calc-result-label">Concentration</div>
+            <div class="calc-result-val" id="calcConc">—</div>
+          </div>
+        </div>
+
+        <!-- STEP 3 — DOSE -->
+        <div class="calc-card">
+          <div class="calc-step-header">
+            <div class="calc-step-num">3</div>
+            <div class="calc-step-label">Your Dose</div>
+          </div>
+          <div class="calc-row">
+            <div class="calc-field" style="flex:2">
+              <div class="calc-field-label">Desired dose</div>
+              <input class="calc-input" type="number" id="calcDoseAmt" placeholder="e.g. 250" oninput="calcUpdate()">
+            </div>
+            <div class="calc-field">
+              <div class="calc-field-label">Unit</div>
+              <select class="calc-select" id="calcDoseUnit" onchange="calcUpdate()">
+                <option value="mcg">mcg</option>
+                <option value="mg">mg</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESULT -->
+        <div class="calc-result-card" id="calcResultCard" style="display:none;">
+          <div class="calc-result-eyebrow">Your Syringe Draw</div>
+          <div class="calc-draw-big" id="calcDrawMl">—</div>
+          <div class="calc-draw-sub" id="calcDrawIU">—</div>
+          <div class="calc-divider"></div>
+          <div class="calc-breakdown" id="calcBreakdown"></div>
+        </div>
+
+        <!-- PROTOCOL -->
+        <div class="calc-card" id="calcProtocolCard" style="display:none;">
+          <div class="calc-step-label">Weekly Protocol</div>
+          <div class="calc-freq-row">
+            <div class="calc-field-label" style="margin-bottom:10px;">Injections per week</div>
+            <div class="calc-freq-btns" id="calcFreqBtns">
+              <button class="freq-btn on" onclick="setFreq(1,this)">1×</button>
+              <button class="freq-btn" onclick="setFreq(2,this)">2×</button>
+              <button class="freq-btn" onclick="setFreq(3,this)">3×</button>
+              <button class="freq-btn" onclick="setFreq(5,this)">5×</button>
+              <button class="freq-btn" onclick="setFreq(7,this)">7×</button>
+            </div>
+          </div>
+          <div class="calc-schedule" id="calcSchedule"></div>
+          <div class="calc-vial-life" id="calcVialLife"></div>
+        </div>
+
+        <!-- DISCLAIMER -->
+        <div class="calc-disclaimer">
+          <div class="calc-disclaimer-icon">⚗</div>
+          <div class="calc-disclaimer-text">For research use only. This calculator is a guide. Always verify dosing with a qualified professional. KX Protocol does not provide medical advice.</div>
+        </div>
+
+      </div>
+    </div>
+
   </div><!-- /screens -->
 
   <!-- TAB BAR -->
-  <div class="tabbar">
-    <button class="tab active" id="tab-home" onclick="goTab('home')">
-      <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span class="tab-label">Home</span>
-    </button>
-    <button class="tab" id="tab-compounds" onclick="goTab('compounds')">
-      <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
-      <span class="tab-label">Catalog</span>
-    </button>
-    <button class="tab" id="tab-subscribe" onclick="goTab('subscribe')">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      <span class="tab-label">Subscribe</span>
-    </button>
-    <button class="tab" id="tab-order" onclick="goTab('order')">
-      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      <span class="tab-label">Order</span>
-    </button>
-  </div>
 
 </div><!-- /app -->
 
@@ -480,28 +822,28 @@ const WA_SVG = `<svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:curr
 
 // ── DATA ──────────────────────────────────────────────────────
 const COMPOUNDS = [
-  { name:"Retatrutide",       code:"RT10",  line:"p", purpose:"Primary Fat Loss Driver",       why:"Drives large fat loss with less reliance on willpower. Targets multiple receptors for superior efficacy.",                                                  bestUse:"Core fat-loss blocks, low maintenance later.", price:169, dose:10,   tags:["fat-loss"] },
-  { name:"Tirzepatide",       code:"TZ10",  line:"p", purpose:"Remove Food Noise",             why:"Dual GIP/GLP-1 agonist. Eliminates food preoccupation and reduces appetite at the neurological level.",                                                   bestUse:"Fat-loss phases, especially for those driven by food cravings.", price:169, dose:10,   tags:["fat-loss"] },
-  { name:"GHK-Cu",            code:"CU50",  line:"p", purpose:"Skin, Collagen & Repair",       why:"Copper peptide supporting skin elasticity and joint resilience. Antioxidant and tissue-supportive.",                                                       bestUse:"Low-dose, year-round. Valuable during rapid body composition changes.", price:79,  dose:50,   tags:["longevity","recovery"] },
-  { name:"BPC-157 + TB-500",  code:"BP20",  line:"p", purpose:"Tendon, Gut & Tissue Repair",   why:"BPC-157 targets gut and localised repair; TB-500 provides systemic tissue healing and anti-inflammation.",                                                bestUse:"Front-loaded during cuts, rotated into heavy training blocks.", price:169, dose:20,   tags:["recovery"] },
-  { name:"MOTS-C",            code:"MS10",  line:"p", purpose:"Metabolic Flexibility",         why:"Mitochondria-derived peptide. Prevents metabolic slowdown, supports fat loss with sustained energy.",                                                     bestUse:"2–4 weeks on/off. Subcutaneous 2–3× weekly.", price:149, dose:10,   tags:["fat-loss","longevity"] },
-  { name:"NAD+",              code:"NJ500", line:"v", purpose:"Cellular Energy & Longevity",   why:"Essential coenzyme in cellular energy production, DNA repair, and sirtuin activation. Declines with age.",                                                bestUse:"Year-round. Higher value during stress or poor sleep.", price:179, dose:500,  tags:["longevity","recovery"] },
-  { name:"Tesamorelin",       code:"TSM10", line:"p", purpose:"Visceral Fat & GH Support",     why:"GHRH analogue. Clinically studied for visceral adipose reduction. Improves body composition and recovery.",                                               bestUse:"Short focused cycles during rebuild or performance phases.", price:209, dose:10,   tags:["fat-loss","gh"] },
-  { name:"Semax",             code:"XA11",  line:"p", purpose:"Focus & Cognitive Drive",       why:"ACTH-derived nootropic peptide. Supports BDNF production and mental stamina. Non-stimulant, non-habituating.",                                            bestUse:"High-demand work or cognitive-intensive periods.", price:109, dose:11,   tags:["cognitive"] },
-  { name:"Selank",            code:"SK11",  line:"p", purpose:"Anxiety Reduction",             why:"Anxiolytic peptide modulating GABA and serotonin. Improves emotional regulation and sleep quality without sedation.",                                     bestUse:"As needed year-round, especially during high-stress periods.", price:109, dose:11,   tags:["cognitive"] },
-  { name:"Ipamorelin",        code:"IP10",  line:"p", purpose:"GH Pulse, Recovery & Sleep",    why:"Selective GHRP. Stimulates natural GH pulse without cortisol elevation. Improves sleep and lean mass retention.",                                        bestUse:"Evening dosing. Most of the year with scheduled breaks.", price:149, dose:10,   tags:["gh","recovery"] },
-  { name:"AOD-9604",          code:"5AD",   line:"p", purpose:"Targeted Fat Loss",             why:"C-terminal GH fragment. Stimulates lipolysis without metabolic side effects of full GH. Appetite-neutral.",                                               bestUse:"Fat-loss phases. Stacks well with GLP-1 compounds.", price:149, dose:5,    tags:["fat-loss"] },
-  { name:"Glutathione",       code:"GTT",   line:"v", purpose:"Oxidative Stress Control",      why:"Master antioxidant. Protects liver function and skin quality during aggressive fat loss and toxin release.",                                               bestUse:"Calorie deficits, travel, high training load, post-illness.", price:149, dose:1500, tags:["longevity","recovery"] },
-  { name:"CJC-1295 With DAC", code:"CD5",   line:"p", purpose:"Long-Acting GH Elevation",      why:"GHRH analogue with DAC for extended half-life. Elevates baseline GH and IGF-1. Supports lean mass and recovery.",                                        bestUse:"Recomp phases, strength blocks, injury-prone periods.", price:149, dose:5,    tags:["gh","recovery"] },
-  { name:"BPC-157",           code:null,    line:"e", purpose:"Gut Repair & Tissue Healing",   why:"Stable pentadecapeptide with localised healing effects on gut mucosa and soft tissue.",                                                                   bestUse:"Gut healing protocols or localised injury.", price:null,dose:10,   tags:["recovery"] },
-  { name:"TB-500",            code:null,    line:"e", purpose:"Tendon Repair & Recovery",       why:"Thymosin Beta-4 fragment. Promotes actin regulation and systemic anti-inflammatory response.",                                                            bestUse:"Heavy training, injury recovery, chronic inflammation.", price:null,dose:10,   tags:["recovery"] },
-  { name:"SS-31",             code:null,    line:"e", purpose:"Mitochondrial Efficiency",       why:"Mitochondria-targeted peptide. Improves ATP efficiency and reduces oxidative stress.",                                                                    bestUse:"Performance stacks and longevity protocols.", price:null,dose:10,   tags:["longevity"] },
-  { name:"Thymosin Alpha-1",  code:null,    line:"e", purpose:"Immune Support",                why:"Thymic peptide modulating T-cell activity. Research-supported for immune resilience and post-illness recovery.",                                          bestUse:"Post-illness, heavy training periods.", price:null,dose:null, tags:["recovery"] },
-  { name:"Epithalon",         code:null,    line:"e", purpose:"Sleep & Longevity",             why:"Tetrapeptide activating telomerase and normalising circadian melatonin. Telomere and sleep research.",                                                    bestUse:"Sleep optimisation, longevity protocols.", price:null,dose:10,   tags:["longevity"] },
-  { name:"Kisspeptin-10",     code:null,    line:"e", purpose:"Libido & Hormonal Signalling",  why:"Hypothalamic neuropeptide stimulating GnRH. Relevant during aggressive restriction where LH/FSH suppression is common.",                                  bestUse:"Hormonal recovery phases, libido restoration.", price:null,dose:null, tags:[] },
-  { name:"KPV",               code:null,    line:"e", purpose:"Gut Inflammation Control",      why:"C-terminal α-MSH tripeptide with anti-inflammatory action targeting intestinal inflammation.",                                                             bestUse:"Gut healing stacks.", price:null,dose:null, tags:["recovery"] },
-  { name:"Cagrilintide",      code:null,    line:"e", purpose:"Hunger Suppression",            why:"Long-acting amylin analogue. Reduces appetite without CNS stimulation.",                                                                                  bestUse:"Aggressive fat loss, combined with GLP-1 compounds.", price:null,dose:null, tags:["fat-loss"] },
-  { name:"Ipa + CJC-1295",    code:null,    line:"e", purpose:"GH Pulse & Recovery",           why:"GHRP/GHRH combination. Ipamorelin provides GH pulse; CJC-1295 amplifies without DAC extended elevation.",                                               bestUse:"Flexible pulsatile GH cycling.", price:null,dose:null, tags:["gh","recovery"] },
+  { name:"Retatrutide",       code:"RT10",  line:"p", purpose:"Primary Fat Loss Driver",      plain:"Reduces hunger and makes dieting easier. Best for aggressive fat-loss phases.",                               price:169, dose:10,   tags:["fat-loss"] },
+  { name:"Tirzepatide",       code:"TZ10",  line:"p", purpose:"Remove Food Noise",            plain:"Less cravings, less snacking, better control. Ideal first-step fat loss peptide.",                           price:169, dose:10,   tags:["fat-loss"] },
+  { name:"GHK-Cu",            code:"CU50",  line:"p", purpose:"Skin, Collagen & Repair",      plain:"Supports skin quality, recovery, and resilience. Popular during body transformation phases.",                price:79,  dose:50,   tags:["longevity","recovery"] },
+  { name:"BPC-157 + TB-500",  code:"BP20",  line:"p", purpose:"Recovery & Tissue Repair",     plain:"Helps soreness, recovery, and joint support. Best for hard training or injury recovery.",                    price:169, dose:20,   tags:["recovery"] },
+  { name:"MOTS-C",            code:"MS10",  line:"p", purpose:"Energy & Metabolism Support",  plain:"Helps maintain energy during fat loss. Great during calorie deficits or training blocks.",                   price:149, dose:10,   tags:["fat-loss","longevity"] },
+  { name:"NAD+",              code:"NJ500", line:"v", purpose:"Cellular Energy & Recovery",   plain:"Supports energy, recovery, and longevity. Useful during stress, burnout, or poor sleep.",                   price:179, dose:500,  tags:["longevity","recovery"] },
+  { name:"Tesamorelin",       code:"TSM10", line:"p", purpose:"Visceral Fat & GH Support",    plain:"Supports body recomposition and recovery. Best for advanced fat-loss protocols.",                            price:209, dose:10,   tags:["fat-loss","gh"] },
+  { name:"Semax",             code:"XA11",  line:"p", purpose:"Focus & Mental Performance",   plain:"Sharper thinking without stimulant crashes. Ideal for work, focus, and productivity.",                      price:109, dose:11,   tags:["cognitive"] },
+  { name:"Selank",            code:"SK11",  line:"p", purpose:"Calm & Stress Support",        plain:"Promotes calm focus and emotional balance. Useful during stress-heavy periods.",                             price:109, dose:11,   tags:["cognitive"] },
+  { name:"Ipamorelin",        code:"IP10",  line:"p", purpose:"Sleep & Recovery Support",     plain:"Supports recovery, sleep quality, and GH pulse. Best taken during evening recovery routines.",              price:149, dose:10,   tags:["gh","recovery"] },
+  { name:"AOD-9604",          code:"5AD",   line:"p", purpose:"Targeted Fat Loss",            plain:"Supports fat metabolism without appetite effects. Stacks well with GLP-1 compounds.",                        price:149, dose:5,    tags:["fat-loss"] },
+  { name:"Glutathione",       code:"GTT",   line:"v", purpose:"Antioxidant & Recovery Support",plain:"Supports liver function and recovery capacity. Useful during hard training or calorie deficits.",           price:149, dose:1500, tags:["longevity","recovery"] },
+  { name:"CJC-1295 With DAC", code:"CD5",   line:"p", purpose:"Long-Acting GH Support",       plain:"Supports lean mass, recovery, and sleep. Best for strength and recovery phases.",                           price:149, dose:5,    tags:["gh","recovery"] },
+  { name:"BPC-157",           code:null,    line:"e", purpose:"Gut & Tissue Support",         plain:"Supports gut health and localised recovery. Useful for digestion and soft tissue repair.",                   price:null,dose:10,   tags:["recovery"] },
+  { name:"TB-500",            code:null,    line:"e", purpose:"Recovery & Mobility Support",  plain:"Supports tissue recovery and inflammation control. Best for high training loads.",                           price:null,dose:10,   tags:["recovery"] },
+  { name:"SS-31",             code:null,    line:"e", purpose:"Mitochondrial Energy Support",  plain:"Supports cellular energy and recovery output. Popular in performance and longevity stacks.",                 price:null,dose:10,   tags:["longevity"] },
+  { name:"Thymosin Alpha-1",  code:null,    line:"e", purpose:"Immune Support",               plain:"Supports immune resilience and recovery. Useful after illness or intense stress.",                           price:null,dose:null, tags:["recovery"] },
+  { name:"Epithalon",         code:null,    line:"e", purpose:"Sleep & Longevity Support",    plain:"Supports sleep rhythm and recovery quality. Popular in longevity-focused protocols.",                        price:null,dose:10,   tags:["longevity"] },
+  { name:"Kisspeptin-10",     code:null,    line:"e", purpose:"Hormonal Support",             plain:"Supports hormonal signalling and libido health. Useful during recovery or restriction phases.",               price:null,dose:null, tags:[] },
+  { name:"KPV",               code:null,    line:"e", purpose:"Gut Inflammation Support",     plain:"Supports gut comfort and inflammation control. Often used in gut-healing stacks.",                           price:null,dose:null, tags:["recovery"] },
+  { name:"Cagrilintide",      code:null,    line:"e", purpose:"Advanced Hunger Control",      plain:"Strong appetite suppression without stimulants. Best combined with GLP-1 compounds.",                        price:null,dose:null, tags:["fat-loss"] },
+  { name:"Ipa + CJC-1295",    code:null,    line:"e", purpose:"GH Pulse & Recovery",          plain:"Supports recovery, sleep, and lean mass. Popular all-round recovery stack.",                                 price:null,dose:null, tags:["gh","recovery"] },
 ];
 
 const STACKS = [
@@ -515,12 +857,12 @@ const STACKS = [
 
 const FILTERS = [
   { key:'all', label:'All' },
+  { key:'bundle', label:'3 for $350 ✦' },
   { key:'fat-loss', label:'Fat Loss' },
   { key:'recovery', label:'Recovery' },
   { key:'cognitive', label:'Cognitive' },
   { key:'gh', label:'GH' },
   { key:'longevity', label:'Longevity' },
-  { key:'bundle', label:'3 for $350 ✦' },
 ];
 
 let activeFilter = 'all';
@@ -530,9 +872,13 @@ let builderSel   = [];
 // ── NAVIGATION ────────────────────────────────────────────────
 function goTab(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tnav').forEach(t => t.classList.remove('active'));
   document.getElementById('screen-'+id).classList.add('active');
-  document.getElementById('tab-'+id).classList.add('active');
+  const tn = document.getElementById('tnav-'+id);
+  if (tn) tn.classList.add('active');
+  // Brand logo = home button; dim it when away from home
+  const brand = document.getElementById('topbar-brand');
+  if (brand) brand.classList.toggle('home-active', id === 'home');
 }
 
 // ── BADGE ─────────────────────────────────────────────────────
@@ -544,45 +890,21 @@ function badge(line) {
 
 // ── CARD HTML ─────────────────────────────────────────────────
 function cardHTML(c, idx) {
-  const sn = c.name.replace(/'/g,"\\'");
   return `<div class="c-card">
     <div class="c-card-main">
       <div class="c-left">
         <div class="c-name-app">${c.name}</div>
         ${c.code ? `<div class="c-code-app">${c.code}</div>` : `<div class="c-code-app" style="color:var(--mist)">Extended Catalog</div>`}
         <div class="c-purpose-app">${c.purpose}</div>
-        <div class="c-why-app">${c.why}</div>
+        <div class="c-plain">${c.plain}</div>
       </div>
       <div class="c-right">
         ${badge(c.line)}
         <div class="${c.price ? 'c-price-app' : 'c-price-poa'}">${c.price ? '$'+c.price : 'POA'}</div>
-        <button class="c-toggle" id="ctog-${idx}" onclick="toggleCard(${idx},this)">
-          <span>Details</span>
-          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-      </div>
-    </div>
-    <div class="c-detail-app" id="cdet-${idx}">
-      <div class="c-detail-body">
-        <div class="dl">Best Use & Protocol</div>
-        <div class="dv">${c.bestUse}</div>
-        <div class="dl">Dose</div>
-        <div class="dv">${c.dose ? c.dose.toLocaleString()+' mg per vial' : 'Contact us for dosing information'}</div>
-        <a href="${WA}?text=${encodeURIComponent('Hi, I\'d like to order '+c.name+(c.code?' ('+c.code+')':'')+'. Please confirm availability and pricing.')}" target="_blank" class="order-btn-full">${WA_SVG} Order ${c.name}</a>
+        <a href="${WA}?text=${encodeURIComponent('Hi, I\'d like to order '+c.name+(c.code?' ('+c.code+')':'')+'. Please confirm availability and pricing.')}" target="_blank" class="c-order-btn">${WA_SVG}</a>
       </div>
     </div>
   </div>`;
-}
-
-function toggleCard(idx, btn) {
-  const d = document.getElementById('cdet-'+idx);
-  const isOpen = d.classList.contains('open');
-  document.querySelectorAll('.c-detail-app.open').forEach(el => {
-    el.classList.remove('open');
-    const t = el.previousElementSibling?.querySelector('.c-toggle');
-    if (t) t.classList.remove('open');
-  });
-  if (!isOpen) { d.classList.add('open'); btn.classList.add('open'); }
 }
 
 // ── HOME CARDS ────────────────────────────────────────────────
@@ -715,6 +1037,252 @@ window.addEventListener('appinstalled', () => {
 
 // hide install banner by default until PWA prompt fires
 document.getElementById('installBanner').classList.add('hidden');
+
+// ── CALCULATOR ────────────────────────────────────────────────
+const CALC_COMPOUNDS = [
+  { name:"Retatrutide (RT10)",    typicalDose:0.5,  unit:"mg",  freq:1, notes:"Start low. Weekly injection." },
+  { name:"Tirzepatide (TZ10)",    typicalDose:2.5,  unit:"mg",  freq:1, notes:"Weekly. Titrate up slowly." },
+  { name:"GHK-Cu (CU50)",         typicalDose:1,    unit:"mg",  freq:3, notes:"3× weekly subcutaneous." },
+  { name:"BPC-157 + TB-500 (BP20)",typicalDose:250, unit:"mcg", freq:3, notes:"Front-load 2× then 3× weekly." },
+  { name:"MOTS-C (MS10)",         typicalDose:10,   unit:"mg",  freq:3, notes:"2–3× weekly. Cycle 2–4 weeks on/off." },
+  { name:"NAD+ (NJ500)",          typicalDose:100,  unit:"mg",  freq:3, notes:"3× weekly or daily low-dose." },
+  { name:"Tesamorelin (TSM10)",   typicalDose:1,    unit:"mg",  freq:5, notes:"Daily or 5× weekly. Short cycles." },
+  { name:"Semax (XA11)",          typicalDose:100,  unit:"mcg", freq:5, notes:"Daily intranasal or sub-q." },
+  { name:"Selank (SK11)",         typicalDose:250,  unit:"mcg", freq:3, notes:"As needed or 3× weekly." },
+  { name:"Ipamorelin (IP10)",     typicalDose:200,  unit:"mcg", freq:7, notes:"Daily evening injection." },
+  { name:"AOD-9604 (5AD)",        typicalDose:300,  unit:"mcg", freq:5, notes:"Daily or 5× weekly." },
+  { name:"Glutathione (GTT)",     typicalDose:600,  unit:"mg",  freq:3, notes:"3× weekly IV or sub-q." },
+  { name:"CJC-1295 w/ DAC (CD5)", typicalDose:2,    unit:"mg",  freq:1, notes:"Once or twice weekly." },
+  { name:"BPC-157",               typicalDose:250,  unit:"mcg", freq:3, notes:"Twice daily for acute injury." },
+  { name:"TB-500",                typicalDose:5,    unit:"mg",  freq:2, notes:"Twice weekly loading phase." },
+  { name:"SS-31",                 typicalDose:1,    unit:"mg",  freq:3, notes:"3× weekly." },
+  { name:"Thymosin Alpha-1",      typicalDose:1.5,  unit:"mg",  freq:2, notes:"Twice weekly." },
+  { name:"Epithalon",             typicalDose:5,    unit:"mg",  freq:7, notes:"Daily for 10–20 day courses." },
+  { name:"Kisspeptin-10",         typicalDose:0.1,  unit:"mg",  freq:3, notes:"3× weekly." },
+  { name:"KPV",                   typicalDose:300,  unit:"mcg", freq:3, notes:"Daily or 3× weekly." },
+  { name:"Cagrilintide",          typicalDose:0.3,  unit:"mg",  freq:1, notes:"Weekly injection." },
+  { name:"Ipa + CJC-1295",        typicalDose:200,  unit:"mcg", freq:7, notes:"Daily evening. Both in same syringe." },
+];
+
+let calcFreq = 1;
+
+function initCalcSelect() {
+  const sel = document.getElementById('calcCompound');
+  CALC_COMPOUNDS.forEach((c, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = c.name;
+    sel.appendChild(opt);
+  });
+}
+
+function setFreq(n, btn) {
+  calcFreq = n;
+  document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  calcUpdate();
+}
+
+function calcUpdate() {
+  const compIdx  = document.getElementById('calcCompound').value;
+  const vialMg   = parseFloat(document.getElementById('calcVialMg').value);
+  const waterMl  = parseFloat(document.getElementById('calcWaterMl').value);
+  const doseAmt  = parseFloat(document.getElementById('calcDoseAmt').value);
+  const doseUnit = document.getElementById('calcDoseUnit').value;
+
+  // Compound hint
+  const hintEl = document.getElementById('calcCompoundHint');
+  if (compIdx !== '') {
+    const c = CALC_COMPOUNDS[compIdx];
+    hintEl.textContent = `Typical: ${c.typicalDose} ${c.unit} — ${c.notes}`;
+    // Pre-fill freq
+    calcFreq = c.freq;
+    document.querySelectorAll('.freq-btn').forEach(b => {
+      b.classList.toggle('on', parseInt(b.textContent) === calcFreq);
+    });
+  } else {
+    hintEl.textContent = '';
+  }
+
+  // Concentration
+  const concRow = document.getElementById('calcConcRow');
+  if (vialMg > 0 && waterMl > 0) {
+    const concMgMl = vialMg / waterMl;
+    const concMcgMl = concMgMl * 1000;
+    document.getElementById('calcConc').textContent = `${concMgMl.toFixed(2)} mg/ml  (${concMcgMl.toFixed(0)} mcg/ml)`;
+    concRow.style.display = 'flex';
+  } else {
+    concRow.style.display = 'none';
+  }
+
+  // Draw calculation
+  const resultCard    = document.getElementById('calcResultCard');
+  const protocolCard  = document.getElementById('calcProtocolCard');
+
+  if (vialMg > 0 && waterMl > 0 && doseAmt > 0) {
+    const concMgMl  = vialMg / waterMl;
+    const doseMg    = doseUnit === 'mcg' ? doseAmt / 1000 : doseAmt;
+    const drawMl    = doseMg / concMgMl;
+    const drawIU    = drawMl * 100; // IU on a 100-unit insulin syringe
+
+    document.getElementById('calcDrawMl').textContent  = drawMl.toFixed(3) + ' ml';
+    document.getElementById('calcDrawIU').textContent  = `${drawIU.toFixed(1)} IU on a 100-unit insulin syringe`;
+
+    // Breakdown
+    const doseMcg = doseMg * 1000;
+    document.getElementById('calcBreakdown').innerHTML = `
+      <div class="calc-brow"><span class="calc-brow-label">Vial size</span><span class="calc-brow-val">${vialMg} mg</span></div>
+      <div class="calc-brow"><span class="calc-brow-label">BAC water</span><span class="calc-brow-val">${waterMl} ml</span></div>
+      <div class="calc-brow"><span class="calc-brow-label">Concentration</span><span class="calc-brow-val">${concMgMl.toFixed(2)} mg/ml</span></div>
+      <div class="calc-brow"><span class="calc-brow-label">Dose</span><span class="calc-brow-val">${doseAmt} ${doseUnit} (${doseMcg.toFixed(0)} mcg / ${doseMg.toFixed(3)} mg)</span></div>
+      <div class="calc-brow"><span class="calc-brow-label">Draw volume</span><span class="calc-brow-val">${drawMl.toFixed(3)} ml</span></div>
+      <div class="calc-brow"><span class="calc-brow-label">Syringe units</span><span class="calc-brow-val">${drawIU.toFixed(1)} IU</span></div>
+    `;
+
+    resultCard.style.display = 'block';
+
+    // Protocol schedule
+    buildSchedule(vialMg, doseMg);
+    protocolCard.style.display = 'block';
+
+  } else {
+    resultCard.style.display    = 'none';
+    protocolCard.style.display  = 'none';
+  }
+}
+
+function buildSchedule(vialMg, doseMg) {
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  // Distribute injections evenly across week
+  const schedules = {
+    1: [0],
+    2: [0, 3],
+    3: [0, 2, 4],
+    4: [0, 1, 3, 5],
+    5: [0, 1, 2, 3, 4],
+    6: [0, 1, 2, 3, 4, 5],
+    7: [0, 1, 2, 3, 4, 5, 6],
+  };
+  const injectDays = schedules[calcFreq] || schedules[1];
+
+  document.getElementById('calcSchedule').innerHTML = days.map((d, i) => {
+    const inject = injectDays.includes(i);
+    return `<div class="day-cell ${inject ? 'inject' : ''}">
+      <span class="day-name">${d}</span>
+      <span class="day-dot"></span>
+    </div>`;
+  }).join('');
+
+  // Vial lifespan
+  const dosesPerVial = vialMg / doseMg;
+  const weeksPerVial = (dosesPerVial / calcFreq).toFixed(1);
+  const daysPerVial  = Math.round(dosesPerVial / calcFreq * 7);
+  document.getElementById('calcVialLife').innerHTML =
+    `At ${calcFreq}× per week — 1 vial lasts approx <strong>${weeksPerVial} weeks (${daysPerVial} days)</strong>. Store reconstituted vials refrigerated. Use within 30 days.`;
+}
+
+initCalcSelect();
+
+// ── LEGAL MODALS ─────────────────────────────────────────────
+const LEGAL = {
+  privacy: {
+    title: 'Privacy Policy',
+    body: `<h3>Information We Collect</h3><p>We collect information you provide directly when placing orders via WhatsApp, including name, contact details, and order information. We do not collect payment data — all payments are processed separately.</p><h3>How We Use Information</h3><p>Order information is used solely to process and fulfil your order. We do not sell, share, or distribute your personal information to third parties.</p><h3>Data Retention</h3><p>Order records are retained for legal and compliance purposes. You may request deletion of your data at any time by contacting us via WhatsApp.</p><h3>Contact</h3><p>For privacy enquiries: +61 419 630 774 via WhatsApp.</p>`
+  },
+  terms: {
+    title: 'Terms & Conditions',
+    body: `<h3>Research Use Only</h3><p>All products sold by KX Protocol are strictly for research purposes only. They are not intended for human or animal consumption, therapeutic application, or self-administration.</p><h3>Eligibility</h3><p>By purchasing, you confirm you are 18 years of age or older and are purchasing for legitimate research purposes.</p><h3>No Medical Advice</h3><p>KX Protocol does not provide medical advice. Nothing on this platform constitutes medical guidance. Consult a qualified healthcare professional before any use.</p><h3>Liability</h3><p>KX Protocol accepts no liability for misuse of products. Products are sold as-is for research purposes under Australian law.</p><h3>Governing Law</h3><p>These terms are governed by the laws of Australia.</p>`
+  },
+  shipping: {
+    title: 'Shipping Policy',
+    body: `<h3>Dispatch Timeframe</h3><p>Orders are dispatched within 1–2 business days of payment confirmation.</p><h3>Packaging</h3><p>All orders are shipped in discreet, plain packaging with no identifying product information on the outside.</p><h3>Delivery</h3><p>We ship Australia-wide. Estimated delivery is 2–5 business days depending on location. Express options available on request.</p><h3>Tracking</h3><p>Tracking information is provided via WhatsApp once your order has been dispatched.</p><h3>Lost or Damaged Orders</h3><p>Contact us via WhatsApp within 7 days of expected delivery if your order has not arrived or arrives damaged.</p>`
+  },
+  refunds: {
+    title: 'Refunds & Returns',
+    body: `<h3>Refund Policy</h3><p>Due to the nature of research compounds, we do not accept returns of opened or used products.</p><h3>Damaged or Incorrect Orders</h3><p>If you receive a damaged or incorrect product, contact us within 48 hours of delivery via WhatsApp with photo evidence. We will arrange a replacement or refund at our discretion.</p><h3>Order Cancellations</h3><p>Orders may be cancelled before dispatch. Contact us immediately via WhatsApp if you need to cancel. Orders already dispatched cannot be cancelled.</p><h3>Contact</h3><p>All refund and return requests must be submitted via WhatsApp: +61 419 630 774.</p>`
+  },
+  ruo: {
+    title: 'Research Use Only Statement',
+    body: `<h3>Important Notice</h3><p>All products supplied by KX Protocol are intended exclusively for in-vitro research and laboratory use by qualified researchers.</p><p>These products are NOT intended for:</p><p>• Human consumption or self-administration<br>• Animal consumption or veterinary use<br>• Therapeutic or medicinal application<br>• Diagnostic purposes</p><h3>Regulatory Compliance</h3><p>KX Protocol operates in compliance with Australian regulations governing research compounds. All products are supplied with the understanding that purchasers are qualified researchers using them for legitimate scientific purposes.</p><h3>No Medical Claims</h3><p>KX Protocol makes no therapeutic claims regarding any products. Nothing on this platform should be construed as medical advice.</p>`
+  }
+};
+
+function showModal(key) {
+  const data = LEGAL[key];
+  if (!data) return;
+  document.getElementById('legalTitle').textContent = data.title;
+  document.getElementById('legalBody').innerHTML = data.body;
+  document.getElementById('legalOverlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('legalOverlay').classList.remove('open');
+}
+
+// ── ORDER FORM ────────────────────────────────────────────────
+function orderFormUpdate() {
+  const name     = (document.getElementById('ofName').value || '').trim();
+  const street   = (document.getElementById('ofStreet').value || '').trim();
+  const suburb   = (document.getElementById('ofSuburb').value || '').trim();
+  const state    = (document.getElementById('ofState').value || '').trim();
+  const postcode = (document.getElementById('ofPostcode').value || '').trim();
+  const items    = (document.getElementById('ofItems').value || '').trim();
+  const notes    = (document.getElementById('ofNotes').value || '').trim();
+
+  const addrParts = [street, [suburb, state].filter(Boolean).join(' '), postcode].filter(Boolean);
+  const address   = addrParts.join(', ');
+
+  const missing = [];
+  if (!name)    missing.push('name');
+  if (!address) missing.push('delivery address');
+  if (!items)   missing.push('order details');
+
+  const validEl  = document.getElementById('orderValidation');
+  const sendBtn  = document.getElementById('orderSendBtn');
+  const preview  = document.getElementById('orderPreview');
+  const previewT = document.getElementById('orderPreviewText');
+
+  if (missing.length) {
+    validEl.textContent = 'Still needed: ' + missing.join(', ');
+    sendBtn.classList.add('disabled');
+    preview.classList.remove('visible');
+  } else {
+    validEl.textContent = '';
+    sendBtn.classList.remove('disabled');
+
+    const msg = buildOrderMsg(name, address, items, notes);
+    previewT.textContent = msg;
+    preview.classList.add('visible');
+  }
+}
+
+function buildOrderMsg(name, address, items, notes) {
+  let msg = `📋 KX Protocol — Order Request\n\n`;
+  msg += `Name: ${name}\n`;
+  msg += `Delivery Address: ${address}\n\n`;
+  msg += `Order:\n${items}`;
+  if (notes) msg += `\n\nNotes: ${notes}`;
+  msg += `\n\nPlease confirm availability, total, and confirmation of payment via transfer receipt to the following:\nBSB: 067 872\nACC: 4516 7732\n\nThank you!`;
+  return msg;
+}
+
+function orderSend() {
+  const name     = (document.getElementById('ofName').value || '').trim();
+  const street   = (document.getElementById('ofStreet').value || '').trim();
+  const suburb   = (document.getElementById('ofSuburb').value || '').trim();
+  const state    = (document.getElementById('ofState').value || '').trim();
+  const postcode = (document.getElementById('ofPostcode').value || '').trim();
+  const items    = (document.getElementById('ofItems').value || '').trim();
+  const notes    = (document.getElementById('ofNotes').value || '').trim();
+
+  const addrParts = [street, [suburb, state].filter(Boolean).join(' '), postcode].filter(Boolean);
+  const address   = addrParts.join(', ');
+
+  if (!name || !address || !items) return;
+
+  const msg = buildOrderMsg(name, address, items, notes);
+  window.open(`${WA}?text=${encodeURIComponent(msg)}`, '_blank');
+}
 
 // ── INIT ──────────────────────────────────────────────────────
 buildHomeChips();
